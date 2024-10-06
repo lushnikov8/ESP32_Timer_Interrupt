@@ -104,7 +104,9 @@ void loop() {
     
 
      
-    unsigned long MyTime = CurrentTimeUnix + 3600*130;
+    //unsigned long MyTime = CurrentTimeUnix + 3600*130;
+    unsigned long MyTime = CurrentTimeUnix;
+
 
     Serial.print(" MyTime: ");
     Serial.print(MyTime);
