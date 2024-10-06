@@ -11,14 +11,8 @@
 // Stop button is attached to PIN 0 (IO0)
 //#define BTN_STOP_ALARM    0
 
-#include <UnixTime.h>
-
-UnixTime stamp(8); 
-
 
 unsigned long CurrentTimeUnix = 0;
-
-
 
 
 hw_timer_t * timer = NULL;
@@ -87,25 +81,17 @@ void loop() {
     
     isrCount = isrCounter;
 
-
-    stamp.getDateTime(CurrentTimeUnix);
-    //Serial.println("CurrentTimeUnix: "+String(CurrentTimeUnix) +" "+stamp.year+"."+stamp.month+"."+stamp.day+" "+stamp.hour+":"+stamp.minute+":"+stamp.second+" day: "+stamp.dayOfWeek);
-
-    //stamp.year, stamp.month, stamp.day
-    //stamp.hour, stamp.minute, stamp.second
-
-
+ 
     // Print it
     Serial.print("onTimer no. ");
     Serial.print(isrCount);
     
     Serial.print(" CurrentTimeUnix: ");
     Serial.print(CurrentTimeUnix);
-    
 
-     
-    //unsigned long MyTime = CurrentTimeUnix + 3600*24*130;
-    unsigned long MyTime = CurrentTimeUnix;
+
+    unsigned long MyTime = CurrentTimeUnix + 3600*24*130 + 7200;
+    //unsigned long MyTime = CurrentTimeUnix;
 
 
     Serial.print(" MyTime: ");
