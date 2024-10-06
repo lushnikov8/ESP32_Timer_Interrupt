@@ -90,8 +90,8 @@ void loop() {
     Serial.print(CurrentTimeUnix);
 
 
-    unsigned long MyTime = CurrentTimeUnix + 3600*24*130 + 7200;
-    //unsigned long MyTime = CurrentTimeUnix;
+    //unsigned long MyTime = CurrentTimeUnix + 3600*24*130 + 7200;
+    unsigned long MyTime = CurrentTimeUnix;
 
 
     Serial.print(" MyTime: ");
