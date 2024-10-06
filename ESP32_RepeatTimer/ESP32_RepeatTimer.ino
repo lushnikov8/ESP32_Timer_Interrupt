@@ -104,7 +104,7 @@ void loop() {
     
 
      
-    //unsigned long MyTime = CurrentTimeUnix + 3600*130;
+    //unsigned long MyTime = CurrentTimeUnix + 3600*24*130;
     unsigned long MyTime = CurrentTimeUnix;
 
 
@@ -117,7 +117,7 @@ void loop() {
     
     //Высчитываем целые дни
     if (MyTime/60/60/24<1) Serial.print ("0");
-    Serial.print ((MyTime/60/60)%24);
+    Serial.print (MyTime/60/60/24);
     Serial.print (" д. ");
    
     //Высчитываем целые часы
