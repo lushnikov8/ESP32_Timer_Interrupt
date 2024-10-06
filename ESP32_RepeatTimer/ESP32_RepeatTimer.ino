@@ -19,6 +19,8 @@ UnixTime stamp(8);
 unsigned long CurrentTimeUnix = 0;
 
 
+
+
 hw_timer_t * timer = NULL;
 volatile SemaphoreHandle_t timerSemaphore;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
@@ -100,21 +102,35 @@ void loop() {
     Serial.print(" CurrentTimeUnix: ");
     Serial.print(CurrentTimeUnix);
     
+
+     
+    unsigned long MyTime = CurrentTimeUnix + 3600*130;
+
+    Serial.print(" MyTime: ");
+    Serial.print(MyTime);
+    
+
+
     Serial.print(" Время с момента включения: ");
+    
+    //Высчитываем целые дни
+    if (MyTime/60/60/24<1) Serial.print ("0");
+    Serial.print ((MyTime/60/60)%24);
+    Serial.print (" д. ");
    
     //Высчитываем целые часы
-    if (CurrentTimeUnix/60/60<10) Serial.print ("0");
-    Serial.print (CurrentTimeUnix/60/60);
+    if (MyTime/60/60<10) Serial.print ("0");
+    Serial.print ((MyTime/60/60)%24);
     Serial.print (":");
    
     //Высчитываем целые минуты, их остаток уже за вычетом целых часов.
-    if (CurrentTimeUnix/60%60<10) Serial.print ("0");
-    Serial.print ((CurrentTimeUnix/60)%60);
+    if (MyTime/60%60<10) Serial.print ("0");
+    Serial.print ((MyTime/60)%60);
     Serial.print (":");
     
     //Высчитываем секунды.
-    if (CurrentTimeUnix%60<10) Serial.print ("0");
-    Serial.print (CurrentTimeUnix%60);
+    if (MyTime%60<10) Serial.print ("0");
+    Serial.print (MyTime%60);
 
     Serial.println();
   }
