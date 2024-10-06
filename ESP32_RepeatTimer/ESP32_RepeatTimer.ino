@@ -11,6 +11,11 @@
 // Stop button is attached to PIN 0 (IO0)
 //#define BTN_STOP_ALARM    0
 
+#include <UnixTime.h>
+
+UnixTime stamp(8); 
+
+
 unsigned long CurrentTimeUnix = 0;
 
 
@@ -63,10 +68,6 @@ void StartInSetupTimerISR(){
 
   // Start an alarm
   timerAlarmEnable(timer);
-
-
-
-
 }
 
 
@@ -84,6 +85,14 @@ void loop() {
     
     isrCount = isrCounter;
 
+
+    stamp.getDateTime(CurrentTimeUnix);
+    //Serial.println("CurrentTimeUnix: "+String(CurrentTimeUnix) +" "+stamp.year+"."+stamp.month+"."+stamp.day+" "+stamp.hour+":"+stamp.minute+":"+stamp.second+" day: "+stamp.dayOfWeek);
+
+    //stamp.year, stamp.month, stamp.day
+    //stamp.hour, stamp.minute, stamp.second
+
+
     // Print it
     Serial.print("onTimer no. ");
     Serial.print(isrCount);
@@ -91,6 +100,22 @@ void loop() {
     Serial.print(" CurrentTimeUnix: ");
     Serial.print(CurrentTimeUnix);
     
+    Serial.print(" Время с момента включения: ");
+   
+    //Высчитываем целые часы
+    if (CurrentTimeUnix/60/60<10) Serial.print ("0");
+    Serial.print (CurrentTimeUnix/60/60);
+    Serial.print (":");
+   
+    //Высчитываем целые минуты, их остаток уже за вычетом целых часов.
+    if (CurrentTimeUnix/60%60<10) Serial.print ("0");
+    Serial.print ((CurrentTimeUnix/60)%60);
+    Serial.print (":");
+    
+    //Высчитываем секунды.
+    if (CurrentTimeUnix%60<10) Serial.print ("0");
+    Serial.print (CurrentTimeUnix%60);
+
     Serial.println();
   }
   
